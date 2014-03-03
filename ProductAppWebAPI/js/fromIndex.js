@@ -30,3 +30,18 @@ function find() {
             $('#product').text('Error: ' + err);
         });
 }
+
+/* this gets called from the button click onclick event for find by category */
+function findByCat() {
+    var category = $('#prodCat').val();
+    $.getJSON(uri + '?category=' + category)
+        .done(function (data) {
+            $.each(data, function (key, item) {
+                //Add a list item for the product
+                $('<li>', { text: formatItem(item) }).appendTo($('#foundProducts'));
+            });
+        })
+        .fail(function (jqXHR, textStatus, err) {
+            $('#product').text('Error' + err);
+        });
+}
